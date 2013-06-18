@@ -1,0 +1,32 @@
+/* CSS Document */
+* {margin:0;padding:0;}
+html, body {height:100%}
+body {font-size:100%;line-height:1.125em;min-width:980px;background:#f2f0fd}
+
+a{color:#335162;text-decoration:underline;outline:none} 
+a:hover{text-decoration:none}
+
+/*header*/
+#header{font-size:1.125em;color:#FFFFFF}
+#header .logo{display:block;margin:27px 0 0 0;height:296px;background:url(eporquenon.png) top left repeat}
+#header h2{color:#990100;text-transform:uppercase;font-size:1.08em;line-height:1.2em;text-align: left;margin:20px 0 0 10px}
+
+/*content*/
+#content {margin:20px 0 0 5px}
+#content table,th,td {border:1px dashed green}
+#content table td {padding-left:5px}
+#content table td.cabeceira {color:#990100;text-transform:uppercase;font-size:1.52em;line-height:1.2em;text-align:center;font-weight:bold}
+#content table td.cabeceira2 {color:#990100;text-transform:uppercase;font-size:1.38em;line-height:1.2em;text-align:center;font-weight:bold}
+#content {font-size:0.75em;width:100%;text-align:left;}
+.col-1 p, .col-2 p{float:left}
+div.col-1{float:left;width:70%}
+div.col-2{float:left;width:30%}
+/*footer*/
+#footer {height:276px;margin-top:20px;text-align:center;width:100%}
+#footer {color:#f2f0fd;font-size:0.75em}
+#footer a {text-decoration:none}  
+#footer a:hover {font-size:1.8em}
+
+/*report*/
+#report {float:right;width:200px;height:60px;margin: 20px 120px 0 0;background-color:#666999;border:1px dashed}
+#report a {display:block;color:#fff;text-transform:uppercase;font-size:1.6em;line-height:1.2em;text-align:center;font-weight:bold;margin: 20px 0 0 0}
