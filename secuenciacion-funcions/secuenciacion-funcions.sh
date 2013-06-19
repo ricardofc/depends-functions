@@ -465,7 +465,7 @@ if [ $? -eq 0 ]; then
       NLINHAFEXIST=$(echo $i | awk -F@ '{print $1}')
       FEXIST=$(echo $i | awk -F@ '{print $2}')
       LISTARINICIO=$((${NLINHAS}-${NLINHAFEXIST}+1))
-      NFINFEXIST=$(nl -ba $1 | tail -$LISTARINICIO | grep }$ | grep -v '\$' | head -1 | awk '{print $1}')
+      NFINFEXIST=$(nl -ba $1 | tail -$LISTARINICIO | grep -E '}$|} #' | grep -v '\$' | head -1 | awk '{print $1}')
       LISTAR=$((${NFINFEXIST}-${NLINHAFEXIST}+1))
       #GARDAR CADA FUNCIÓN NUN FICHEIRO
       nl -ba $1 | tail -$LISTARINICIO | head -$LISTAR  > reports/tmp/funcions_$FEXIST.tmp
