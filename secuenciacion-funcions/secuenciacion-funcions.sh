@@ -418,26 +418,28 @@ apuntalar_raiz
 
 estudo_execucion() {
   if [ -f reports/tmp/erros.tmp ];then
-    mv reports/tmp/erros.tmp reports/error
+    mv reports/tmp/erros.tmp reports/error > /dev/null 2>&1
   fi
-  mv reports/tmp/chamada-funcions.tmp reports/main
-  mv reports/tmp/dependencia-un-nivel*recursivo.tmp reports/depends
-  mv reports/tmp/dependencia-un-nivel.tmp reports/depends
-  mv reports/tmp/dependencias-funcions.tmp reports/depends
+  mv reports/tmp/chamada-funcions.tmp reports/main > /dev/null 2>&1
+  mv reports/tmp/dependencia-un-nivel*recursivo.tmp reports/depends > /dev/null 2>&1
+  mv reports/tmp/dependencia-un-nivel.tmp reports/depends > /dev/null 2>&1
+  mv reports/tmp/dependencias-funcions.tmp reports/depends > /dev/null 2>&1
   if [ -f reports/tmp/depuracion.tmp ];then
-    mv reports/tmp/depuracion.tmp reports/debug
+    mv reports/tmp/depuracion.tmp reports/debug > /dev/null 2>&1
   fi
-  mv reports/tmp/diagrama*.svg reports/diagrams
-  mv reports/tmp/diagrama-dependencias-funcions_*_*.dot reports/dots
-  mv reports/tmp/diagrama-dependencias-funcions.dot reports/dots
-  mv reports/tmp/diagrama-dependencias-funcions-simplificada.dot reports/dots
-  mv reports/tmp/funcions*.tmp reports/functions
-  mv reports/tmp/e.tmp reports/out-functions/without-number.tmp
-  mv reports/tmp/e2.tmp reports/out-functions/with-number.tmp
+  mv reports/tmp/diagrama*.svg reports/diagrams > /dev/null 2>&1
+  mv reports/tmp/diagrama-dependencias-funcions_*_*.dot reports/dots > /dev/null 2>&1
+  mv reports/tmp/diagrama-dependencias-funcions.dot reports/dots > /dev/null 2>&1
+  if [ -f reports/tmp/diagrama-dependencias-funcions-simplificada.dot ];then
+    mv reports/tmp/diagrama-dependencias-funcions-simplificada.dot reports/dots > /dev/null 2>&1
+  fi
+  mv reports/tmp/funcions*.tmp reports/functions > /dev/null 2>&1
+  mv reports/tmp/e.tmp reports/out-functions/without-number.tmp > /dev/null 2>&1
+  mv reports/tmp/e2.tmp reports/out-functions/with-number.tmp > /dev/null 2>&1
   if [ -f reports/tmp/nodes_only.tmp ];then
-    mv reports/tmp/nodes_only.tmp reports/depends
+    mv reports/tmp/nodes_only.tmp reports/depends > /dev/null 2>&1
   fi
-  rm -f reports/tmp/*
+  rm -f reports/tmp/* > /dev/null 2>&1
   clear
   echo -ne '\e[01;77m'
   echo
