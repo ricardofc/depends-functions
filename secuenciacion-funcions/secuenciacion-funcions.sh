@@ -55,7 +55,7 @@ procura_dependencias() {
 for i in $NLINHAANDFEXIST
 do
   NLINHAFEXIST=$(echo $i | awk -F@ '{print $1}')
-  FEXIST=$(echo $i | awk -F@ '{print $2}')
+  FEXIST=$(echo $i | awk -F@ '{print $2}' | sed 's/^function//g')
   for j in ${FEXISTS}
   do
     FUNCIONSDENTRO=$(cat reports/tmp/funcions_${FEXIST}.tmp | sed '1d' | awk '{print $2}' | grep ^$j | grep -v '()' | tr -d ' ')
@@ -89,7 +89,7 @@ else
   for i in $NLINHAANDFEXIST
   do
     NLINHAFEXIST=$(echo $i | awk -F@ '{print $1}')
-    FEXIST=$(echo $i | awk -F@ '{print $2}')
+    FEXIST=$(echo $i | awk -F@ '{print $2}' | sed 's/^function//g')
     echo -ne "  $NLINHAFEXIST $FEXIST\n"
   done
   echo -ne '\e[00m'
@@ -102,7 +102,7 @@ depuracion() {
 for i in $NLINHAANDFEXIST
 do
   NLINHAFEXIST=$(echo $i | awk -F@ '{print $1}')
-  FEXIST=$(echo $i | awk -F@ '{print $2}')
+  FEXIST=$(echo $i | awk -F@ '{print $2}' | sed 's/^function//g')
   grep -o $FEXIST reports/tmp/dependencias-funcions.tmp > /dev/null
   if [ $? -ne 0 ]; then
     grep -o $FEXIST reports/tmp/chamada-funcions.tmp > /dev/null
@@ -285,7 +285,7 @@ procura_inicio_fin_raiz() {
 for i in $NLINHAANDFEXIST
 do
   NLINHAFEXIST=$(echo $i | awk -F@ '{print $1}')
-  FEXIST=$(echo $i | awk -F@ '{print $2}')
+  FEXIST=$(echo $i | awk -F@ '{print $2}' | sed 's/^function//g')
   cat reports/tmp/dependencias-funcions2.tmp | awk -v myvar="$FEXIST" -v myvar2="$NLINHAFEXIST" '{ if ( $NF == myvar) print $0,"-->",myvar2, $NF}' >> reports/tmp/dependencias-funcions3.tmp
 done
 while read line
@@ -303,7 +303,7 @@ apuntalar_raiz() {
 for i in $NLINHAANDFEXIST
 do
   NLINHAFEXIST=$(echo $i | awk -F@ '{print $1}')
-  FEXIST=$(echo $i | awk -F@ '{print $2}')
+  FEXIST=$(echo $i | awk -F@ '{print $2}' | sed 's/^function//g')
   for j in $(cat reports/tmp/g.tmp)
   do
     if [ "$FEXIST" = "$j" ]; then
@@ -457,13 +457,13 @@ if [ $? -eq 0 ]; then
   LOGOABRAIX="$PWD/logo-abraix.jpg"
   NLINHAS=$(cat $1 | wc -l)
   NLINHAANDFEXIST=$(nl -ba -s@ $1 | grep '()' | grep -vE '#|=|"' | sed -e 's/[ \t]*//g' -e 's/\s*//g' | awk -F\( '{print $1}')
-  FEXISTS=$(nl -ba -s@ $1 | grep '()' | grep -vE '#|=|"' | sed -e 's/[ \t]*//g' -e 's/\s*//g' | awk -F\( '{print $1}' | awk -F@ '{print $2}')
+  FEXISTS=$(nl -ba -s@ $1 | grep '()' | grep -vE '#|=|"' | sed -e 's/[ \t]*//g' -e 's/\s*//g' | awk -F\( '{print $1}' | awk -F@ '{print $2}' | sed 's/^function//g')
   if ! [ -z "$FEXISTS" ];then
     ##echo --------------------------------------------
     for i in $NLINHAANDFEXIST
     do
       NLINHAFEXIST=$(echo $i | awk -F@ '{print $1}')
-      FEXIST=$(echo $i | awk -F@ '{print $2}')
+      FEXIST=$(echo $i | awk -F@ '{print $2}' | sed 's/^function//g')
       LISTARINICIO=$((${NLINHAS}-${NLINHAFEXIST}+1))
       NFINFEXIST=$(nl -ba $1 | tail -$LISTARINICIO | grep -E '}$|} #' | grep -v '\$' | head -1 | awk '{print $1}')
       LISTAR=$((${NFINFEXIST}-${NLINHAFEXIST}+1))
